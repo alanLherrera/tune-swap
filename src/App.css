@@ -8,3 +8,14 @@
 .Nav {
   background-color: #2E3440 !important;
 }
+
+.navCard {
+  height: 75vh !important;
+  width: 75vw !important;
+  background-color: #3B4252 !important;
+  margin: auto;
+}
+
+.signIn {
+  width: 100vw;
+}
