@@ -10,12 +10,31 @@
 }
 
 .navCard {
-  height: 75vh !important;
-  width: 75vw !important;
+  height: 45vh !important;
+  width: 60vw !important;
   background-color: #3B4252 !important;
   margin: auto;
 }
 
 .signIn {
   width: 100vw;
+}
+
+.cardTitle {
+  margin-top: 10vh !important;
+}
+
+.createAcc {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  text-decoration: none;
+}
+
+.createAcc:hover {
+  color: #a0a3a9;
 }
