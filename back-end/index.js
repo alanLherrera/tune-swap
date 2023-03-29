@@ -27,7 +27,7 @@ const scopes = [
 ];
 
 const spotifyApi = new Spotify({
-  redirectUri: 'http://localhost:3000/',
+  redirectUri: 'http://localhost:3000/sign-in',
   clientId: 'c6d26137276a4defae105e0f0198d5c3',
   clientSecretId: 'e7871e7e973e4a5a8e94492bb03e7998',
 });
