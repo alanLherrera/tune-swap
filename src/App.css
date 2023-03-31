@@ -38,3 +38,59 @@
 .createAcc:hover {
   color: #a0a3a9;
 }
+
+.header{
+  align-items: left;
+}
+
+/* BASE STYLES */
+:root {
+  --clr-dark: #0f172a;
+  --clr-light: #f1f5f9;
+  --clr-accent: #3B4252;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  word-spacing: 1.4px;
+  font-family: "Roboto", sans-serif;
+  color: var(--clr-dark);
+  background-color: var(--clr-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  /* width: 80%; */
+  /* height: 700px; */
+  margin: 0 auto;
+  /* border: 10px solid var(--clr-dark); */
+}
+
+.item {
+  width: 300px;
+  height: 150px;
+  background-color: #4C566A;
+  padding: 1em;
+  font-weight: 700;
+  color: var(--clr-light);
+  text-align: center;
+  border: 3px solid var(--clr-accent);
+  border-radius: 10px;
+}
+
+/* END OF BASE STYLES */
+.container {
+  display: flex;
+  
+}
