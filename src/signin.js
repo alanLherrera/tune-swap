@@ -1,5 +1,9 @@
 import { Card, Button } from "react-bootstrap"
 
+function signer () {
+    window.location.replace('http://localhost:3000/api/sign-in')
+}
+
 function SignIn () {
     return(
         <div className="signIn">
@@ -11,7 +15,7 @@ function SignIn () {
                     <Card.Body>
                         <Card.Text>In order to use this application, we are required to have you sign in with Spotify</Card.Text>
                         <br></br>
-                        <Button variant="success">Sign-in</Button>{' '}
+                        <Button variant="success" onClick={signer}>Sign-in</Button>{' '}
                         <br></br>
                         <br></br>
                         <Card.Link className="createAcc" target="_blank" rel="noopener noreferrer" href='https://www.spotify.com/us/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F'>Create Spotify account here</Card.Link>

@@ -1,7 +1,9 @@
 const express = require('express')
+let cors = require('cors')
 const app = express()
-const Spotify = require('spotify-web-api-js')
+const Spotify = require('spotify-web-api-node')
 const port = 3000
+let signedIn = '0'
 
 // copied from sotify documentation
 const scopes = [
@@ -27,12 +29,12 @@ const scopes = [
 ];
 
 const spotifyApi = new Spotify({
-  redirectUri: 'http://localhost:3000/sign-in',
-  clientId: 'c6d26137276a4defae105e0f0198d5c3',
-  clientSecretId: 'e7871e7e973e4a5a8e94492bb03e7998',
+  redirectUri: 'http://localhost:3000/callback',
+  clientId: process.env.REACT_APP_clientId,
+  clientSecret: process.env.REACT_APP_clientSecret,
 });
 
-app.get('/sign-in', (req, res) => {
+app.get('/api/sign-in', (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 })
 
@@ -65,7 +67,8 @@ spotifyApi
       console.log(
         `Sucessfully retreived access token. Expires in ${expires_in} s.`
       );
-      res.send('Success! You can now close the window.');
+      signedIn = '1'
+      res.redirect('http://localhost:3001');
 
       setInterval(async () => {
         const data = await spotifyApi.refreshAccessToken();
@@ -88,4 +91,8 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
+})
+
+app.get('/api/isloggedin', cors(), (req,res) => {
+  res.send(signedIn)
 })
