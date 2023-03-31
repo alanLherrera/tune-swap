@@ -5,6 +5,7 @@ const dotenv = require('dotenv').config()
 const Spotify = require('spotify-web-api-node')
 const port = 3000
 let signedIn = '0'
+let userId = ''
 // copied from sotify documentation
 const scopes = [
   'ugc-image-upload',
@@ -49,6 +50,8 @@ app.get('/callback', (req, res) => {
     return;
   }
 
+
+
 //taken from github repo
 spotifyApi
     .authorizationCodeGrant(code)
@@ -69,6 +72,11 @@ spotifyApi
       );
       signedIn = '1'
       res.redirect('http://localhost:3001');
+
+      spotifyApi.getMe().then(req => {
+        userId = req.body.id
+      })
+
 
       setInterval(async () => {
         const data = await spotifyApi.refreshAccessToken();
@@ -94,5 +102,9 @@ app.listen(port, () => {
 })
 
 app.get('/api/isloggedin', cors(), (req,res) => {
-  res.send(signedIn)
+  res.send([signedIn, userId])
+})
+
+app.get('/api/logout', cors(), (req, res) => {
+  signedIn = '0'
 })

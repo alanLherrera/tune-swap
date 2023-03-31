@@ -6,16 +6,22 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react'
 
+
 function NavBar() {
 
 let [signedIn, setSignedIn] = useState(<Nav.Link as={Link} to="/sign-in">Sign-In</Nav.Link>)
 
+function logOut () {
+  fetch('http://localhost:3000/api/logout')
+  setSignedIn(<Nav.Link as={Link} to="/sign-in">Sign-In</Nav.Link>)
+}
+
 
   useEffect(()=> {
     fetch('http://localhost:3000/api/isloggedin').then((response) => response.text()).then(res => {
-      console.log(res)
-      if (res === '1'){
-        setSignedIn(<Nav.Link as={Link}>Logged In</Nav.Link>)
+      res = JSON.parse(res)
+      if (res[0] === '1'){
+        setSignedIn(<><Nav.Link as={Link}>User: {res[1]}</Nav.Link><Button variant='sucess' onClick={logOut}>LogOut</Button></>)
     }
   })
   }, [])
