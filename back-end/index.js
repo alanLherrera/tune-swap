@@ -1,10 +1,10 @@
 const express = require('express')
 let cors = require('cors')
 const app = express()
+const dotenv = require('dotenv').config()
 const Spotify = require('spotify-web-api-node')
 const port = 3000
 let signedIn = '0'
-
 // copied from sotify documentation
 const scopes = [
   'ugc-image-upload',
@@ -30,8 +30,8 @@ const scopes = [
 
 const spotifyApi = new Spotify({
   redirectUri: 'http://localhost:3000/callback',
-  clientId: process.env.REACT_APP_clientId,
-  clientSecret: process.env.REACT_APP_clientSecret,
+  clientId: process.env.clientId,
+  clientSecret: process.env.clientSecret,
 });
 
 app.get('/api/sign-in', (req, res) => {
