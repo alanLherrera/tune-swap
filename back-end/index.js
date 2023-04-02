@@ -6,6 +6,12 @@ const Spotify = require('spotify-web-api-node')
 const port = 3000
 let signedIn = '0'
 let userId = ''
+//const { Pool } = require['pg'];
+const db = require('../config/db')
+const testDbConnection = require('../config/db')
+
+console.log(testDbConnection)
+
 // copied from sotify documentation
 const scopes = [
   'ugc-image-upload',
@@ -92,6 +98,9 @@ spotifyApi
       res.send(`Error getting Tokens: ${error}`);
     });
 });
+
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
