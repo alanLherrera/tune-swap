@@ -1,5 +1,6 @@
-const { sq } = require("../config/db");
+const { sequalize } = require("../config/db");
 const { DataTypes } = require("sequelize");
+
 
 const User = sq.define("user_id", {
     email: {
@@ -17,8 +18,6 @@ const User = sq.define("user_id", {
     },
   
   });
-
-
 
 
 User.sync().then(() => {

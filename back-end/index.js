@@ -1,6 +1,7 @@
 const express = require('express')
 let cors = require('cors')
 const app = express()
+var sequelizeRouter = require('sequelize-router');
 app.use(express.json());
 const dotenv = require('dotenv').config({path:'../../.env'})
 const Spotify = require('spotify-web-api-node')
@@ -10,10 +11,12 @@ let userId = ''
 const db = require('../config/db')
 const { Pool } = require('pg')
 const Playlist = require('../models/playlist')
-
+const Models = require('../models')
 
 db.testDbConnection()
 
+app.use('/api', sequelizeRouter(Models.Playlist)); 
+app.use('/api', sequelizeRouter(Models.Users));
 
 
 // copied from spotify documentation
@@ -38,6 +41,7 @@ const scopes = [
   'user-follow-read',
   'user-follow-modify'
 ];
+
 
 const spotifyApi = new Spotify({
   redirectUri: 'http://localhost:3000/callback',
@@ -127,6 +131,26 @@ app.get('/playlist', async (req, res) => {
  catch (err){
   console.log(err)
  }
+})
+
+app.put('/api/inventory/:id', async (req, res) => {
+  try{
+    const updatePlaylist = await Playlist.update({playlistName: req.params.id })
+
+    res.json(Playlist.rows[0])
+  }catch (err){
+    console.log(err)
+  }
+})
+
+app.delete('/api/playlist/:id', async (req,res) => {
+  try{
+    const deletePlaylist = await Playlist.delete({ playlistName: req.params.id })
+
+    res.json(Playlist.rows[0])
+  }catch (err){
+    console.log(err)
+  }
 })
 
 app.get('/', (req, res) => {
