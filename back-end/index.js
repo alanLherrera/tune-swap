@@ -122,8 +122,11 @@ app.get('/playlist', async (req, res) => {
 
     const getPlaylist = await Playlist.find({playlistName: req.query.name })
 
-    //res.
+    res.json(Playlist.rows[1])
   }
+ catch (err){
+  console.log(err)
+ }
 })
 
 app.get('/', (req, res) => {
