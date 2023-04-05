@@ -1,13 +1,19 @@
 const { Sequelize, Models } = require("sequelize");
-
+const dotenv = require('dotenv').config({path:'../.env'})
 
 
 const sequelize = new Sequelize(
   database = process.env.DATABASE, 
-  username = process.env.USER, 
+  username = process.env.DB_USER, 
   password = process.env.PASSWORD, 
   {
-  host: 'localhost',
+  host: process.env.HOST,
+  dialectOptions: {
+    ssl: {
+      require: true, 
+      rejectUnauthorized: false 
+    }
+  },
   dialect: 'postgres' 
 });
 
@@ -25,4 +31,4 @@ const testDbConnection = async () => {
   };
   
 
-  module.exports = { sq: sequelize, testDbConnection };
+  module.exports = {  sequelize, testDbConnection };

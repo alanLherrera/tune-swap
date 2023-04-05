@@ -1,18 +1,22 @@
 const express = require('express')
 let cors = require('cors')
 const app = express()
-const dotenv = require('dotenv').config()
+app.use(express.json());
+const dotenv = require('dotenv').config({path:'../../.env'})
 const Spotify = require('spotify-web-api-node')
 const port = 3000
 let signedIn = '0'
 let userId = ''
-//const { Pool } = require['pg'];
 const db = require('../config/db')
-const testDbConnection = require('../config/db')
+const { Pool } = require('pg')
+const Playlist = require('../models/playlist')
 
-console.log(testDbConnection)
 
-// copied from sotify documentation
+db.testDbConnection()
+
+
+
+// copied from spotify documentation
 const scopes = [
   'ugc-image-upload',
   'user-read-playback-state',
@@ -99,8 +103,28 @@ spotifyApi
     });
 });
 
+app.post('/playlist', async (req, res) => {
+  try {
+    const { playlist } = req.body;
+      
+    const newPlaylist = await Playlist.create({playlistName: playlist, songName: 'serenity'})
 
+    console.log(newPlaylist.rows)
+    res.status(201)
+    
+  }catch (err){
+    console.log(err.message)
+  }
+})
 
+app.get('/playlist', async (req, res) => {
+  try{
+
+    const getPlaylist = await Playlist.find({playlistName: req.query.name })
+
+    //res.
+  }
+})
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

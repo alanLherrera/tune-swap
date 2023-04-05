@@ -1,7 +1,7 @@
-const { sq } = require("../config/db");
+const { sequelize } = require("../config/db");
 const { DataTypes } = require("sequelize");
 
-const playlist = sq.define("playlist_id",{
+const Playlist = sequelize.define("playlist_id",{
   songName: {
     type: DataTypes.STRING,
     allowNull: true,
@@ -13,8 +13,8 @@ const playlist = sq.define("playlist_id",{
 
 
 })
-playlist.sync().then(() => {
+Playlist.sync().then(() => {
   console.log("Playlist model succesfully synced")
 })
 
-module.export = playlist;
+module.exports = Playlist;
