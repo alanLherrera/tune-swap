@@ -1,7 +1,7 @@
 const { Sequelize, Models } = require("sequelize");
-const dotenv = require('dotenv').config({path:'../.env'})
+const dotenv = require('dotenv').config()
 
-
+// console.log(process.env.DATABASE)
 const sequelize = new Sequelize(
   database = process.env.DATABASE, 
   username = process.env.DB_USER, 

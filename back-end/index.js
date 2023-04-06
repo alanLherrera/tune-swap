@@ -3,7 +3,7 @@ let cors = require('cors')
 const app = express()
 var sequelizeRouter = require('sequelize-router');
 app.use(express.json());
-const dotenv = require('dotenv').config({path:'../../.env'})
+const dotenv = require('dotenv').config({path:'../.env'})
 const Spotify = require('spotify-web-api-node')
 const port = 3000
 let signedIn = '0'
@@ -11,12 +11,12 @@ let userId = ''
 const db = require('../config/db')
 const { Pool } = require('pg')
 const Playlist = require('../models/playlist')
-const Models = require('../models')
+const Users = require('../models/log-in')
 
 db.testDbConnection()
 
-app.use('/api', sequelizeRouter(Models.Playlist)); 
-app.use('/api', sequelizeRouter(Models.Users));
+app.use('/api', sequelizeRouter(Playlist)); 
+app.use('/api', sequelizeRouter(Users));
 
 
 // copied from spotify documentation
@@ -110,11 +110,13 @@ spotifyApi
 app.post('/playlist', async (req, res) => {
   try {
     const { playlist } = req.body;
-      
-    const newPlaylist = await Playlist.create({playlistName: playlist, songName: 'serenity'})
+    let song = ''
+    if ('song' in req.body) {
+      song = req.body.song
+    }
+    const newPlaylist = await Playlist.create({playlistName: playlist, songName: song})
 
-    console.log(newPlaylist.rows)
-    res.status(201)
+    res.sendStatus(201)
     
   }catch (err){
     console.log(err.message)
@@ -123,38 +125,35 @@ app.post('/playlist', async (req, res) => {
 
 app.get('/playlist', async (req, res) => {
   try{
-
-    const getPlaylist = await Playlist.find({playlistName: req.query.name })
-
-    res.json(Playlist.rows[1])
+    const getPlaylist = await Playlist.findAll({ where: { playlistName: req.query.name } });
+    res.json(getPlaylist)
   }
  catch (err){
   console.log(err)
  }
 })
 
-app.put('/api/inventory/:id', async (req, res) => {
+app.put('/playlist/:id', async (req, res) => {
   try{
-    const updatePlaylist = await Playlist.update({playlistName: req.params.id })
 
-    res.json(Playlist.rows[0])
+    const updatePlaylist = await Playlist.update({playlistName: req.query.name}, { where: { id: req.params.id } })
+
+    res.sendStatus(204)
+
   }catch (err){
     console.log(err)
   }
 })
 
-app.delete('/api/playlist/:id', async (req,res) => {
+app.delete('/playlist', async (req,res) => {
   try{
-    const deletePlaylist = await Playlist.delete({ playlistName: req.params.id })
+    const deletePlaylist = await Playlist.destroy({ where: { playlistName: req.query.name } })
 
-    res.json(Playlist.rows[0])
+    res.sendStatus(204)
+
   }catch (err){
     console.log(err)
   }
-})
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
 })
 
 app.listen(port, () => {

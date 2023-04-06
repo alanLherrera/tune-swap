@@ -1,8 +1,8 @@
-const { sequalize } = require("../config/db");
+const { sequelize } = require("../config/db");
 const { DataTypes } = require("sequelize");
 
 
-const User = sq.define("user_id", {
+const User = sequelize.define("user_id", {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
