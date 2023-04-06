@@ -42,7 +42,7 @@ const scopes = [
   'user-follow-modify'
 ];
 
-
+//This is where we are authenticating our Spotify Devloper Log-In via Access Token and Refresh Token
 const spotifyApi = new Spotify({
   redirectUri: 'http://localhost:3000/callback',
   clientId: process.env.clientId,
@@ -65,8 +65,6 @@ app.get('/callback', (req, res) => {
   }
 
 
-
-//taken from github repo
 spotifyApi
     .authorizationCodeGrant(code)
     //allows for token refresh
@@ -107,6 +105,13 @@ spotifyApi
     });
 });
 
+//this will be the api end point where we send off to spotify
+app.post('/send_to_spotify', (req, res) => {
+ //this is a to do in future
+ res.statusCode(404)
+})
+
+//API end point that creates playlist with or without songs
 app.post('/playlist', async (req, res) => {
   try {
     const { playlist } = req.body;
@@ -123,6 +128,8 @@ app.post('/playlist', async (req, res) => {
   }
 })
 
+//API endpoint that retrieves playlist from DB
+//IMPORTANT: must use in /playlist?name='WHATEVER ITS CALLED'
 app.get('/playlist', async (req, res) => {
   try{
     const getPlaylist = await Playlist.findAll({ where: { playlistName: req.query.name } });
@@ -133,10 +140,12 @@ app.get('/playlist', async (req, res) => {
  }
 })
 
+//API Endpoint that updates the name of the Playlist
+//IMPORTANT: must use /playlist/:id?name='WHATEVER ITS CALLED'
 app.put('/playlist/:id', async (req, res) => {
   try{
 
-    const updatePlaylist = await Playlist.update({playlistName: req.query.name}, { where: { id: req.params.id } })
+    await Playlist.update({playlistName: req.query.name}, { where: { id: req.params.id } })
 
     res.sendStatus(204)
 
@@ -145,9 +154,12 @@ app.put('/playlist/:id', async (req, res) => {
   }
 })
 
+
+//API Endpoint that deletes selected playlist by name
+//IMPORTANT: must use with /playlist/?name='WHATEVER IT IS'
 app.delete('/playlist', async (req,res) => {
   try{
-    const deletePlaylist = await Playlist.destroy({ where: { playlistName: req.query.name } })
+    await Playlist.destroy({ where: { playlistName: req.query.name } })
 
     res.sendStatus(204)
 
