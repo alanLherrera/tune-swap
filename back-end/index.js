@@ -12,6 +12,7 @@ const db = require('../config/db')
 const { Pool } = require('pg')
 const Playlist = require('../models/playlist')
 const Users = require('../models/log-in')
+let playlistName = 'tune-swap'
 
 db.testDbConnection()
 
@@ -110,21 +111,43 @@ spotifyApi
 //TODO MAKE SURE TO STORE TRACK HASH (id) IN DB
 app.post('/generate', async (req, res) => {
  let generate = await spotifyApi.getRecommendations({'seed_genres': ['hip-hop']})
- res.send(generate['body']['tracks'])
 
-})
+generate = generate['body']['tracks']
+
+ for (let i = 0; i < generate.length; i++){
+  await Playlist.create({playlistName: playlistName, songName: generate[i]['name'], songHash: generate[i]['id']})
+  }
+  
+ res.send(generate)
+
+});
 
 //this will be the api end point where we send off to spotify
-// USE THIS WAY sender/?name='WHATEVER ITS CALLED'
-app.post('/sender', async (req,res) => {
-  let playlist = await spotifyApi.createPlaylist(userId, req.query.name, { 'public' : true })
-  
-  const getPlaylist = await Playlist.findAll({ where: { playlistName: req.query.name } });
 
-  let tracks = getPlaylist.map(track => track["playlist_id"]["dataValues"]["track_hash"])
+app.post('/sender', async (req,res) => {
+  
+  const getPlaylist = await Playlist.findAll({ where: { playlistName: playlistName } });
+
+  let playlist = ''
+  
+  if(getPlaylist.length > 0 && getPlaylist[0].playlistHash !== '' && getPlaylist[0].playlistHash !== null) {
+    playlist = getPlaylist[0].playlistHash
+  } else {
+    playlist = await spotifyApi.createPlaylist(userId, playlistName, { 'public' : true })
+    playlist = playlist['body']['id']
+  }
+ 
+  console.log(playlist)
+
+  let tracks = getPlaylist.map(track => `spotify:track:${track.songHash}`)
   //put this in in the DB
-  console.log(getPlaylist)
-  console.log(playlist['body']['id'])
+  // tracks = JSON.stringify(tracks)
+
+  await spotifyApi.addTracksToPlaylist(playlist, tracks)
+  // console.log(playlist['body']['id'])
+
+  await Playlist.update({playlistHash: playlist}, { where: { playlistName: playlistName } })
+
   res.sendStatus(201)
 })
 
