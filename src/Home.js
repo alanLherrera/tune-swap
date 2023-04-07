@@ -1,4 +1,5 @@
 import { Navbar } from "react-bootstrap"
+import Button from 'react-bootstrap/Button'
 
 function Home () {
     return(
@@ -11,7 +12,7 @@ function Home () {
         <body>
         <div className="container" >
                <div className="item item-1">Welcome to Tune-Swap! here you can generate a playlist and copy it into your spotify account. Please Select a Genre to get started.</div>
-               <div className="item item-2"><button class="btn btn-success btn-lg btn" type="submit" onSubmit="">Button</button></div>
+               <div className="item item-2 justify-content-center"><Button href={'/generate'}class="btn btn-success btn-lg btn" type="button" >Generate</Button></div>
                <div className="item item-3">Music playlist logos</div>
             </div>
         </body>
