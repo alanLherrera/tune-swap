@@ -1,4 +1,5 @@
 import { Navbar } from "react-bootstrap"
+import mainLogo from'./assets/appLogo.png';
 
 function Home () {
     return(
@@ -6,7 +7,7 @@ function Home () {
         <div className="header">
         <h1 className="header">This is Tune Swap</h1>
             <h2 className="short-desc">A playlist just for you</h2>
-         
+            <img  src={mainLogo} alt="fireSpot"/>
         </div>
         <body>
         <div className="container" >
