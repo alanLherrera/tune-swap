@@ -105,10 +105,27 @@ spotifyApi
     });
 });
 
+//This endpoint generates playlist from spotify via genre
+
+//TODO MAKE SURE TO STORE TRACK HASH (id) IN DB
+app.post('/generate', async (req, res) => {
+ let generate = await spotifyApi.getRecommendations({'seed_genres': ['hip-hop']})
+ res.send(generate['body']['tracks'])
+
+})
+
 //this will be the api end point where we send off to spotify
-app.post('/send_to_spotify', (req, res) => {
- //this is a to do in future
- res.statusCode(404)
+// USE THIS WAY sender/?name='WHATEVER ITS CALLED'
+app.post('/sender', async (req,res) => {
+  let playlist = await spotifyApi.createPlaylist(userId, req.query.name, { 'public' : true })
+  
+  const getPlaylist = await Playlist.findAll({ where: { playlistName: req.query.name } });
+
+  let tracks = getPlaylist.map(track => track["playlist_id"]["dataValues"]["track_hash"])
+  //put this in in the DB
+  console.log(getPlaylist)
+  console.log(playlist['body']['id'])
+  res.sendStatus(201)
 })
 
 //API end point that creates playlist with or without songs
@@ -167,6 +184,13 @@ app.delete('/playlist', async (req,res) => {
     console.log(err)
   }
 })
+
+app.get('/getgenre', async (req, res) => {
+  let genre = await spotifyApi.getAvailableGenreSeeds()
+  res.send(genre)
+})
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
