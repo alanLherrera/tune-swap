@@ -10,8 +10,8 @@ function Home () {
         </div>
         <body>
         <div className="container" >
-               <div className="item item-1">Small description of how the app works and a link that sends you to the Sign-In page</div>
-               <div className="item item-2">The actual generate button</div>
+               <div className="item item-1">Welcome to Tune-Swap! here you can generate a playlist and copy it into your spotify account. Please Select a Genre to get started.</div>
+               <div className="item item-2"><button class="btn btn-success btn-lg btn" type="submit" onSubmit="">Button</button></div>
                <div className="item item-3">Music playlist logos</div>
             </div>
         </body>

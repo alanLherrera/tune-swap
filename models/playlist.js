@@ -10,6 +10,12 @@ const Playlist = sequelize.define("playlist_id",{
     type: DataTypes.STRING,
     allowNull: false,
   },
+  songHash: {
+    type: DataTypes.STRING,
+  },
+  playlistHash: {
+    type: DataTypes.STRING,
+  },
 
 
 })
