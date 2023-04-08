@@ -3,8 +3,8 @@ import { Navbar } from "react-bootstrap"
 
 
 import Button from 'react-bootstrap/Button'
-
 import { useNavigate } from "react-router-dom";
+import mainLogo from './assets/appLogo.png'
 
 
 function Home () {

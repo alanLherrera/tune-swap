@@ -238,4 +238,6 @@ app.get('/api/isloggedin', cors(), (req,res) => {
 
 app.get('/api/logout', cors(), (req, res) => {
   signedIn = '0'
+  access_token = ''
+  console.log('Logged Out')
 })
