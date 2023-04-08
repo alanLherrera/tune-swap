@@ -117,27 +117,16 @@ body {
 .pl{
   margin:auto;
   padding:30px;
-  max-width: fit-content;
-  max-height: fit-content;
-  display:flex;
+  margin-top: 5%;
+  /* display:flex; */
   
 }
 .send-button{
   margin-bottom: auto;
-
-}
-.songs{
-  margin:auto;
-  padding:30px;
-  max-width: fit-content;
-  max-height: fit-content;
-  display:flex;
-  float: left;
-
-  
+  margin-top: 3%;
 }
 .chicken-wing{
-  margin:auto;
+  margin-left:44%;
   padding:30px;
   max-width: fit-content;
   max-height: fit-content;
@@ -152,3 +141,4 @@ body {
 .genreButton:hover {
 background-color: #3B4252 !important;
 }
+

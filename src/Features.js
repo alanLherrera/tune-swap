@@ -92,12 +92,11 @@ function Features () {
     return(
         <>
         <div>
-            <h1>Generator</h1>
             
             
             {isVisible && <div className="genre">{genres}</div>}
 
-            <div className="chicken-wing">
+            
 
             <div className="pl"> <h1>Current Playlist</h1> </div>
 
@@ -110,7 +109,7 @@ function Features () {
             )
           })}
 
-            </div>
+           
             </div>
 
             <div className="send-button">
