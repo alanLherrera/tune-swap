@@ -111,9 +111,6 @@ body {
   text-align: center;
   border: 3px solid var(--clr-accent);
   border-radius: 10px;
-<<<<<<< HEAD
-  margin-bottom: 550px;
-=======
 }
 
 .genre {
@@ -163,5 +160,4 @@ background-color: #3B4252 !important;
 
 .remove-button:hover {
   background-color: red !important;
->>>>>>> e2bd9c53222d669543c8ba2edeb3fac8c8b45503
 }
