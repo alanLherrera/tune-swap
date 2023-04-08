@@ -93,14 +93,28 @@ function Features () {
         <>
         <div>
             <h1>Generator</h1>
+            
+            
             {isVisible && <div className="genre">{genres}</div>}
-            <Button variant='success' onClick={send}>SEND TO SPOTIFY</Button>
-            <div>
+
+            <div className="chicken-wing">
+
+            <div className="pl"> <h1>Current Playlist</h1> </div>
+
+            
+
+            <div className="songs">
             {myArray.map((item)=>{
             return (
               <div key={item.id}>{item[1]['songName']}</div>
             )
           })}
+
+            </div>
+            </div>
+
+            <div className="send-button">
+            <Button variant='success' onClick={send}>SEND TO SPOTIFY</Button>
             </div>
         </div>
         </>

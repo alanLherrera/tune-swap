@@ -105,9 +105,44 @@ body {
 
 .genre {
   margin: auto;
-  width: 60%;
-}
+  padding: 20px;
+  max-width: fit-content;
+  max-height: fit-content;
+  display:flex;
+  flex-direction:column;
+  float: right;
 
+  
+}
+.pl{
+  margin:auto;
+  padding:30px;
+  max-width: fit-content;
+  max-height: fit-content;
+  display:flex;
+  
+}
+.send-button{
+  margin-bottom: auto;
+
+}
+.songs{
+  margin:auto;
+  padding:30px;
+  max-width: fit-content;
+  max-height: fit-content;
+  display:flex;
+  float: left;
+
+  
+}
+.chicken-wing{
+  margin:auto;
+  padding:30px;
+  max-width: fit-content;
+  max-height: fit-content;
+  display:flex;
+}
 .genreButton {
   margin: 1% !important;
   background-color: #a0a3a9 !important;
