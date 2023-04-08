@@ -21,7 +21,7 @@ function logOut () {
     fetch('http://localhost:3000/api/isloggedin').then((response) => response.text()).then(res => {
       res = JSON.parse(res)
       if (res[0] === '1'){
-        setSignedIn(<><Nav.Link as={Link}>User: {res[1]}</Nav.Link><Button variant='sucess' onClick={logOut}>LogOut</Button></>)
+        setSignedIn(<><Nav.Link as={Link}>User: {res[1]}</Nav.Link><Button className='logout' variant='sucess' onClick={logOut}>LogOut</Button></>)
     }
   })
   }, [])
