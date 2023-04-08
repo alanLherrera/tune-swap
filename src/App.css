@@ -145,6 +145,7 @@ background-color: #3B4252 !important;
 .remove-button {
   background-color: #2E3440 !important;
   border: #2E3440 !important;
+  margin-left: .5% !important;
 }
 
 .remove-button:hover {
