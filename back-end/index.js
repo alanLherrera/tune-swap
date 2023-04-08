@@ -185,7 +185,7 @@ app.post('/playlist', async (req, res) => {
 //IMPORTANT: must use in /playlist?name='WHATEVER ITS CALLED'
 app.get('/playlist', async (req, res) => {
   try{
-    const getPlaylist = await Playlist.findAll({ where: { playlistName: req.query.name } });
+    const getPlaylist = await Playlist.findAll({ where: { playlistName: playlistName } });
     res.json(getPlaylist)
   }
  catch (err){
@@ -238,4 +238,6 @@ app.get('/api/isloggedin', cors(), (req,res) => {
 
 app.get('/api/logout', cors(), (req, res) => {
   signedIn = '0'
+  access_token = ''
+  console.log('Logged Out')
 })
