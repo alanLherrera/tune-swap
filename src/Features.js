@@ -1,135 +1,60 @@
 import { Button } from "react-bootstrap"
+import { useState, useEffect } from "react"
 
 
 function Features () {
 
+    const [isVisible, setIsVisible] = useState(true)
+    let [myArray, setMyArray] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+              const response = await fetch('http://localhost:3000/playlist');
+              const data = await response.json();
+              let newData = Object.entries(data)
+            //   console.log(newData)
+              setMyArray(newData);
+            //   console.log(myArray)
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          fetchData();
+        }, []);
+
+    useEffect(() => {
+        // function logger (){
+            console.log(myArray)
+        // }
+        // logger()
+    })
+
     let genres = [
         "acoustic",
-        "afrobeat",
-        "alt-rock",
-        "alternative",
-        "ambient",
-        "anime",
-        "black-metal",
-        "bluegrass",
         "blues",
-        "bossanova",
-        "brazil",
-        "breakbeat",
-        "british",
-        "cantopop",
-        "chicago-house",
         "children",
         "chill",
         "classical",
         "club",
-        "comedy",
         "country",
         "dance",
-        "dancehall",
-        "death-metal",
-        "deep-house",
-        "detroit-techno",
         "disco",
         "disney",
-        "drum-and-bass",
-        "dub",
         "dubstep",
         "edm",
         "electro",
-        "electronic",
-        "emo",
-        "folk",
-        "forro",
-        "french",
-        "funk",
-        "garage",
-        "german",
-        "gospel",
-        "goth",
-        "grindcore",
-        "groove",
-        "grunge",
-        "guitar",
-        "happy",
-        "hard-rock",
-        "hardcore",
-        "hardstyle",
-        "heavy-metal",
         "hip-hop",
         "holidays",
-        "honky-tonk",
         "house",
-        "idm",
-        "indian",
-        "indie",
-        "indie-pop",
-        "industrial",
-        "iranian",
-        "j-dance",
-        "j-idol",
-        "j-pop",
-        "j-rock",
         "jazz",
         "k-pop",
-        "kids",
-        "latin",
-        "latino",
-        "malay",
-        "mandopop",
         "metal",
-        "metal-misc",
-        "metalcore",
-        "minimal-techno",
-        "movies",
-        "mpb",
-        "new-age",
         "new-release",
-        "opera",
-        "pagode",
+        "opera",,
         "party",
-        "philippines-opm",
-        "piano",
         "pop",
-        "pop-film",
-        "post-dubstep",
-        "power-pop",
-        "progressive-house",
-        "psych-rock",
-        "punk",
-        "punk-rock",
-        "r-n-b",
-        "rainy-day",
-        "reggae",
-        "reggaeton",
-        "road-trip",
-        "rock",
-        "rock-n-roll",
-        "rockabilly",
-        "romance",
-        "sad",
-        "salsa",
-        "samba",
-        "sertanejo",
-        "show-tunes",
-        "singer-songwriter",
-        "ska",
-        "sleep",
-        "songwriter",
-        "soul",
-        "soundtracks",
-        "spanish",
-        "study",
-        "summer",
-        "swedish",
-        "synth-pop",
-        "tango",
-        "techno",
-        "trance",
-        "trip-hop",
-        "turkish",
-        "work-out",
-        "world-music"
+        "punk-rock"
     ]
 
     function buttonClick (text) {
@@ -143,9 +68,12 @@ function Features () {
               })
               selectedGenre = await selectedGenre.json()
             console.log(selectedGenre[0])
+            window.location.reload(false)
             //map over array to display and style the songs going into playlist
+            setIsVisible(false);
         }
     }
+
 
     async function send  () {
         await fetch('http://localhost:3000/sender', {
@@ -158,15 +86,22 @@ function Features () {
     }
 
     genres = genres.map((text) => {
-        return <Button onClick={buttonClick(text)}>{text}</Button>
+        return <Button className="genreButton" onClick={buttonClick(text)}>{text}</Button>
     })
 
     return(
         <>
         <div>
-            <h1>Features Page</h1>
-            <div>{genres}</div>
+            <h1>Generator</h1>
+            {isVisible && <div className="genre">{genres}</div>}
             <Button variant='success' onClick={send}>SEND TO SPOTIFY</Button>
+            <div>
+            {myArray.map((item)=>{
+            return (
+              <div key={item.id}>{item[1]['songName']}</div>
+            )
+          })}
+            </div>
         </div>
         </>
     )

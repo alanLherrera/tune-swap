@@ -88,10 +88,11 @@ body {
   display: flex;
   justify-content: space-around;
   padding: auto !important;
+  ;
 }
 
 .item {
-  width: 33%;
+  width: 37%;
   height: 150px;
   background-color: #4C566A;
   padding: 1em;
@@ -100,4 +101,19 @@ body {
   text-align: center;
   border: 3px solid var(--clr-accent);
   border-radius: 10px;
+}
+
+.genre {
+  margin: auto;
+  width: 60%;
+}
+
+.genreButton {
+  margin: 1% !important;
+  background-color: #a0a3a9 !important;
+  border: #a0a3a9 !important;
+}
+
+.genreButton:hover {
+background-color: #3B4252 !important;
 }

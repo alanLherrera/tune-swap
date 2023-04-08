@@ -185,7 +185,7 @@ app.post('/playlist', async (req, res) => {
 //IMPORTANT: must use in /playlist?name='WHATEVER ITS CALLED'
 app.get('/playlist', async (req, res) => {
   try{
-    const getPlaylist = await Playlist.findAll({ where: { playlistName: req.query.name } });
+    const getPlaylist = await Playlist.findAll({ where: { playlistName: playlistName } });
     res.json(getPlaylist)
   }
  catch (err){
