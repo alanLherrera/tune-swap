@@ -117,7 +117,7 @@ body {
 .pl{
   margin:auto;
   padding:30px;
-  margin-top: 5%;
+  margin-top: 50px;
   /* display:flex; */
   
 }
@@ -142,3 +142,11 @@ body {
 background-color: #3B4252 !important;
 }
 
+.remove-button {
+  background-color: #2E3440 !important;
+  border: #2E3440 !important;
+}
+
+.remove-button:hover {
+  background-color: red !important;
+}
