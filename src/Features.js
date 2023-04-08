@@ -97,7 +97,7 @@ function Features () {
             <div className="songs">
             {myArray.map((item)=>{
             return (
-              <div key={item.id}>{item[1]['songName']}<Button className="remove-button">Remove</Button></div>
+              <div key={item.id}>{item[1]['songName']}<div><Button className="remove-button">Remove</Button></div></div>
             )
           })}
             </div>
