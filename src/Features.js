@@ -89,6 +89,17 @@ function Features () {
         return <Button className="genreButton" onClick={buttonClick(text)}>{text}</Button>
     })
 
+    async function destroy () {
+        await fetch('http://localhost:3000/playlist',{
+            method: 'DELETE',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+
+        })
+        
+    }
+
     return(
         <>
         <div>
@@ -97,7 +108,7 @@ function Features () {
             <div className="songs">
             {myArray.map((item)=>{
             return (
-              <div key={item.id}>{item[1]['songName']}<div><Button className="remove-button">Remove</Button></div></div>
+              <div key={item.id}>{item[1]['songName']}<div><Button className="remove-button" onClick={destroy}>Remove</Button></div></div>
             )
           })}
             </div>
