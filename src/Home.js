@@ -1,11 +1,10 @@
 
 import { Navbar } from "react-bootstrap"
-
-
+import mainLogo from "./assets/appLogo.png"
+import backGround from "./assets/bkdImage.png"
 import Button from 'react-bootstrap/Button'
 
 import { useNavigate } from "react-router-dom";
-
 
 function Home () {
     const navigate = useNavigate()
@@ -19,7 +18,10 @@ function Home () {
         <div className="header">
         <h1 className="header">This is Tune Swap</h1>
             <h2 className="short-desc">A playlist just for you</h2>
-            <img  src={mainLogo} alt="fireSpot"/>
+            <img src={mainLogo} alt="fireSpot" width={"40%"}/>
+            
+            
+           
         </div>
         <body>
         <div className="container" >

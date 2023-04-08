@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: #2E3440 !important;
-  color: white;
+  color: rgb(255, 255, 255);
   height: 100vh;
 }
 
@@ -15,6 +15,7 @@
   width: 60vw !important;
   background-color: #3B4252 !important;
   margin: auto;
+
 }
 
 .signIn {
@@ -65,6 +66,15 @@
   box-sizing: border-box;
 }
 
+img {
+  border-radius: 15%;
+  padding: 20px;
+  width: 35%;
+  height: 35%;
+  margin-top: 45px;
+  
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -94,10 +104,11 @@ body {
   width: 33%;
   height: 150px;
   background-color: #4C566A;
-  padding: 1em;
+  padding: 1.5em;
   font-weight: 700;
   color: var(--clr-light);
   text-align: center;
   border: 3px solid var(--clr-accent);
   border-radius: 10px;
+  margin-bottom: 550px;
 }
