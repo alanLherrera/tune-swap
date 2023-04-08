@@ -7,6 +7,7 @@
 
 .Nav {
   background-color: #2E3440 !important;
+  width: 100vw !important;
 }
 
 .navCard {
@@ -18,6 +19,14 @@
 
 .signIn {
   width: 100vw;
+}
+
+.logout {
+  color: #a0a3a9 !important;
+}
+
+.logout:hover {
+  color: rgba(255, 255, 255, 0.75) !important;
 }
 
 .cardTitle {
@@ -74,12 +83,15 @@ body {
 .container {
   /* width: 80%; */
   /* height: 700px; */
-  margin: 0 auto;
+  margin: auto !important;
   /* border: 10px solid var(--clr-dark); */
+  display: flex;
+  justify-content: space-around;
+  padding: auto !important;
 }
 
 .item {
-  width: 300px;
+  width: 33%;
   height: 150px;
   background-color: #4C566A;
   padding: 1em;
@@ -88,10 +100,4 @@ body {
   text-align: center;
   border: 3px solid var(--clr-accent);
   border-radius: 10px;
-}
-
-/* END OF BASE STYLES */
-.container {
-  display: flex;
-  
 }

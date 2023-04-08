@@ -12,9 +12,9 @@ function App() {
     <div className="App">
       <NavBar />
     <Routes>
-    <Route exact path="/*" element={<Home />}/>
     <Route exact path="/features" element={<Features />}/>
     <Route exact path="/sign-in" element={<SignIn/>}/>
+    <Route path="/*" element={<Home />}/>
     </Routes>
     </div>
     </BrowserRouter>

@@ -16,6 +16,14 @@ let playlistName = 'tune-swap'
 
 db.testDbConnection()
 
+const corsOptions ={
+  origin:'*', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
+
 app.use('/api', sequelizeRouter(Playlist)); 
 app.use('/api', sequelizeRouter(Users));
 
@@ -107,10 +115,15 @@ spotifyApi
 });
 
 //This endpoint generates playlist from spotify via genre
-
-//TODO MAKE SURE TO STORE TRACK HASH (id) IN DB
-app.post('/generate', async (req, res) => {
- let generate = await spotifyApi.getRecommendations({'seed_genres': ['hip-hop']})
+//MUST BE /generate?genre=ex
+app.post('/generate', cors(), async (req, res) => {
+ 
+  if (signedIn ==! '1') {
+  res.sendStatus(404)
+  return
+ }
+ 
+  let generate = await spotifyApi.getRecommendations({'seed_genres': [req.query.genre]})
 
 generate = generate['body']['tracks']
 
@@ -124,7 +137,7 @@ generate = generate['body']['tracks']
 
 //this will be the api end point where we send off to spotify
 
-app.post('/sender', async (req,res) => {
+app.post('/sender', cors(), async (req,res) => {
   
   const getPlaylist = await Playlist.findAll({ where: { playlistName: playlistName } });
 
@@ -146,7 +159,7 @@ app.post('/sender', async (req,res) => {
   await spotifyApi.addTracksToPlaylist(playlist, tracks)
   // console.log(playlist['body']['id'])
 
-  await Playlist.update({playlistHash: playlist}, { where: { playlistName: playlistName } })
+  await Playlist.destroy({ where: { playlistName: playlistName } })
 
   res.sendStatus(201)
 })

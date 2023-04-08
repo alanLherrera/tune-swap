@@ -1,3 +1,6 @@
+import { Button } from "react-bootstrap"
+
+
 function Features () {
 
     let genres = [
@@ -129,12 +132,43 @@ function Features () {
         "world-music"
     ]
 
+    function buttonClick (text) {
+        return async () => {
+            let selectedGenre = await fetch(`http://localhost:3000/generate?genre=${text}`, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                  'Access-Control-Allow-Origin':'*'
+                }
+              })
+              selectedGenre = await selectedGenre.json()
+            console.log(selectedGenre[0])
+            //map over array to display and style the songs going into playlist
+        }
+    }
+
+    async function send  () {
+        await fetch('http://localhost:3000/sender', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Access-Control-Allow-Origin':'*'
+            }
+        })
+    }
+
+    genres = genres.map((text) => {
+        return <Button onClick={buttonClick(text)}>{text}</Button>
+    })
 
     return(
         <>
+        <div>
             <h1>Features Page</h1>
+            <div>{genres}</div>
+            <Button variant='success' onClick={send}>SEND TO SPOTIFY</Button>
+        </div>
         </>
-
     )
 }
 

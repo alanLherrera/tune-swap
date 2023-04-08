@@ -1,11 +1,19 @@
+
 import { Navbar } from "react-bootstrap"
-<<<<<<< HEAD
-import mainLogo from'./assets/appLogo.png';
-=======
+
+
 import Button from 'react-bootstrap/Button'
->>>>>>> dff7f021c4db758854bef38d64d61e622e94faa7
+
+import { useNavigate } from "react-router-dom";
+
 
 function Home () {
+    const navigate = useNavigate()
+
+    function handleClick() {
+    navigate("/features");
+    }
+    
     return(
         <>
         <div className="header">
