@@ -97,7 +97,7 @@ function Features () {
             }
         })
         song = await song
-            window.location.reload(false)
+        window.location.reload(false)
     }
     
 
@@ -108,7 +108,6 @@ function Features () {
             <div className="pl"> <h1>Current Playlist</h1> </div>
             <div className="songs">
             {myArray.map((item)=>{
-                console.log(item[1]['songName'])
             return (
               <div key={item.id}>{item[1]['songName']}<div><Button className="remove-button" onClick={() => {destroy(item[1]['songName'])}}>Remove</Button></div></div>
             )
