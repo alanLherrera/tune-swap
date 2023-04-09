@@ -108,7 +108,7 @@ function Features () {
             <div className="songs">
             {myArray.map((item)=>{
             return (
-              <div key={item.id}>{item[1]['songName']}<div><Button className="remove-button" onClick={() => {destroy(item[1]['songName'])}}>Remove</Button></div></div>
+              <div key={item.id}>{item[1]['songName']}<div><Button className="remove-button" onClick={() => {destroy(item[1]['songName'])}}>Remove</Button><hr></hr></div></div>
             )
           })}
             </div>

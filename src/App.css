@@ -151,9 +151,10 @@ background-color: #3B4252 !important;
 }
 
 .remove-button {
-  background-color: #2E3440 !important;
-  border: #2E3440 !important;
+  background-color: #4C566A !important;
+  border: #4C566A !important;
   margin-left: .5% !important;
+  font-weight: 700 !important;
 }
 
 .remove-button:hover {
@@ -173,4 +174,11 @@ background-color: #3B4252 !important;
   margin-top: 5%;
   /* position: fixed; */
   width: 100%;
+}
+.songs{
+  margin: auto;
+  padding: 10px;
+  width: 50%;
+  border-radius: 1%;
+  background-color: #4C566A;
 }
