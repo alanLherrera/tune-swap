@@ -89,16 +89,17 @@ function Features () {
         return <Button className="genreButton" onClick={buttonClick(text)}>{text}</Button>
     })
 
-    async function destroy () {
-        await fetch('http://localhost:3000/playlist',{
+    async function destroy (name) {
+        let song = await fetch(`http://localhost:3000/delete?name=${name}`,{
             method: 'DELETE',
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }
-
         })
-        
+        song = await song
+            window.location.reload(false)
     }
+    
 
     return(
         <>
@@ -107,8 +108,9 @@ function Features () {
             <div className="pl"> <h1>Current Playlist</h1> </div>
             <div className="songs">
             {myArray.map((item)=>{
+                console.log(item[1]['songName'])
             return (
-              <div key={item.id}>{item[1]['songName']}<div><Button className="remove-button" onClick={destroy}>Remove</Button></div></div>
+              <div key={item.id}>{item[1]['songName']}<div><Button className="remove-button" onClick={() => {destroy(item[1]['songName'])}}>Remove</Button></div></div>
             )
           })}
             </div>

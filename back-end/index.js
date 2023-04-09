@@ -210,9 +210,9 @@ app.put('/playlist/:id', async (req, res) => {
 
 //API Endpoint that deletes selected playlist by name
 //IMPORTANT: must use with /playlist/?name='WHATEVER IT IS'
-app.delete('/playlist', async (req,res) => {
+app.delete('/delete', async (req,res) => {
   try{
-    await Playlist.destroy({ where: { playlistName: req.query.name } })
+    await Playlist.destroy({ where: { songName: req.query.name } })
 
     res.sendStatus(204)
 
