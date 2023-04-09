@@ -102,8 +102,7 @@ function Features () {
     
 
     return(
-        <>
-        <div>
+        <div className="surounding">
             {isVisible && <div className="genre">{genres}</div>}
             <div className="pl"> <h1>Current Playlist</h1> </div>
             <div className="songs">
@@ -117,7 +116,6 @@ function Features () {
             <Button variant='success' onClick={send}>SEND TO SPOTIFY</Button>
             </div>
         </div>
-        </>
     )
 }
 
